@@ -1,18 +1,13 @@
 'use strict';
-<<<<<<< HEAD
-const array =
-=======
 const COUNTRYDATA =
->>>>>>> e1552d5b0769e7607415e62b5d1f57f8331ee585
     /**
      * 
      */
    [{questions:'What is the capital of Djibouti?', 
      answers:['Djibouti', 'Yerevan', 'Dili', 'Cairo'], 
      correctAnswer:'Djibouti', 
-     icon:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Djibouti.svg/2000px-Flag_of_Djibouti.svg.png' 
-     alt:'Flag of Djibouti'
-    }, 
+     icon:'url(https://upload.wikimedia.org/wikipedia/commons/3/34/Flag_of_Djibouti.svg)', 
+     alt:'Flag of Djibouti'}, 
     /**
      * 
      */

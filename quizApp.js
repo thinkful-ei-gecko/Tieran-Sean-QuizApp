@@ -14,25 +14,36 @@
 'use strict' 
 //  let questionNumber = 0;
 //  let scoreCount = 0;
+/*
+function nextQuestion(){
+    $('.questionAsked').on('click', '.startTest, function (event) {
+
+}*/
+function nextQuestion() {
+    $('header').css('color', 'black');
+    $('label[for = choice1]').html(COUNTRYDATA[0].answers[0]);
+    $('label[for = choice2]').html(COUNTRYDATA[0].answers[1]);
+    $('label[for = choice3]').html(COUNTRYDATA[0].answers[2]);
+    $('label[for = choice4]').html(COUNTRYDATA[0].answers[3]);
+}
 
 function startQuiz(){
-    $('.initialStart').on('click','.startTest', function (event){
-        
-        $('.initialStart').remove();
-        $('questionForm').css('display','block');
-        $('questionNumber').text(1);
-        
-    });
+  $('.initialStart').on('click','.startTest', function (event){   
+    $('.initialStart').remove();
+    $('body').css('background-image', 'url(https://i.pinimg.com/originals/c7/d9/c3/c7d9c3323f7c1828b1ceaee5facb2791.jpg)');
+    $('.questionForm').css('display','block');
+    $('.questionAsked').html(COUNTRYDATA[0].questions);
+    $('.flagBox').css({ background:COUNTRYDATA[0].icon, 'background-size':'contain'});
+    nextQuestion();
+  });
 }
-
-
 
 function takeQuiz(){
-startQuiz();
+  startQuiz();
 
 }
 
-$(takeQuiz)
+$(takeQuiz);
 
 
 

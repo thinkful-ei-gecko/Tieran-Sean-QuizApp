@@ -8,21 +8,40 @@
     <link href="quizApp.css" rel="stylesheet"/>
 </head>
 <body>
-    <header >
-        <h1 class ='quizTitle'>Country Capital Quiz</h1>
+    <header>
+        <h1 class ='quizTitle'> World Capitals Quiz</h1>
         <ul>
             <li>Question:<span arialive = "polite" class = 'questionNumber'>0</span>/5</li>
             <li>Score:<span arialive= "polite" class = 'scoreCount'>0</span></li>
         </ul>
     </header>
     <main>
-       <section class="initialStart">
-        <h1>Do you know the capitals of other countries? </h1>
-        <button class="startTest">Begin!</button>
-       </section> 
-       <section class="questionForm"*></section>
-
+        <section class="initialStart">
+            <h1>Let's see how well you know other countries' capitals.. </h1>
+            <button class="startTest">Begin!</button>
+            <h2> ..or maybe you'd like to </h2>
+            <form action="https://en.wikipedia.org/wiki/List_of_national_capitals" >
+                <button class = "learnButton" type = "submit">Learn!</button>
+            </form>       
+        </section> 
+        <section class="questionFormSection">
+            <form class = "questionForm" action="/some-server-endpoint" method = "post">
+                <!---<legend> Questions </legend>-->
+                <div class = "questionBox">
+                    <div class = "flagBox"></div>
+                    <label class ="questionAsked"  for="Question Asked"></label>
+                    <fieldset name="Multiple Choice">
+                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice1' id='choice1' >choice1</label></br>
+                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice2' id='choice2' >choice2</label></br>
+                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice3' id='choice3' >choice3</label></br>
+                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice4' id='choice4' >choice4</label></br>
+                    </fieldset>
+                    <button class="submitAnswer">Submit Answer</button>
+                </div>
+            </form>
+            </section>
     </main>
+    <script src="/js/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="quizAppData.js"></script>
     <script src="quizApp.js"></script>
