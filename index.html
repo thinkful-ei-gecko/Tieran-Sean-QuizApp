@@ -17,32 +17,31 @@
     </header>
     <main>
         <section class="initialStart">
-            <h1>Let's see how well you know other countries' capitals.. </h1>
+            <h2>Let's see how well you know other countries' capitals.. </h2>
             <button class="startTest">Begin!</button>
-            <h2> ..or maybe you'd like to </h2>
+            <h3> ..or maybe you'd like to </h3>
             <form action="https://en.wikipedia.org/wiki/List_of_national_capitals" >
                 <button class = "learnButton" type = "submit">Learn!</button>
             </form>       
         </section> 
         <section class="questionFormSection">
-            <form class = "questionForm" action="/some-server-endpoint" method = "post">
+            <form class = "questionForm">
                 <!---<legend> Questions </legend>-->
                 <div class = "questionBox">
                     <div class = "flagBox"></div>
                     <label class ="questionAsked"  for="Question Asked"></label>
                     <fieldset name="Multiple Choice">
-                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice1' id='choice1' >choice1</label></br>
-                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice2' id='choice2' >choice2</label></br>
-                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice3' id='choice3' >choice3</label></br>
-                        <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <label for='choice4' id='choice4' >choice4</label></br>
-                        <button type='submit' class="submitAnswer" id='btnGetChoice'>Submit Answer</button>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice1' id='choice1' >choice1</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice2' id='choice2' >choice2</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice3' id='choice3' >choice3</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice4' id='choice4' >choice4</span></label></br>
                     </fieldset>
-                    <!-- <button type='submit' class="submitAnswer" id='btnGetChoice'>Submit Answer</button> -->
+                    <button class="submitAnswer">Submit Answer</button>
                 </div>
             </form>
             </section>
     </main>
-    <script src="/js/jquery.min.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="quizAppData.js"></script>
     <script src="quizApp.js"></script>

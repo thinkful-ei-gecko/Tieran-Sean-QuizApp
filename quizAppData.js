@@ -1,5 +1,5 @@
 'use strict';
-const COUNTRYDATA =
+const COUNTRYDATA = 
     /**
      * 
      */
@@ -40,3 +40,14 @@ const COUNTRYDATA =
      correctAnswer:'Athens', 
      icon:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/2000px-Flag_of_Greece.svg.png', 
      alt:'Flag of Greece'}];
+
+
+
+
+const newBackground = [
+  {icon:'', alt:'Djibouti'},
+  {icon:'', alt:'French'},
+  {icon:'', alt:'Guyana'},
+  {icon:'', alt:'Greenland'},
+  {icon:'', alt:'Greece'}
+];

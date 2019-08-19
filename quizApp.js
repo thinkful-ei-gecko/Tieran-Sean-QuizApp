@@ -13,38 +13,56 @@
  */
 'use strict' 
 let questionNumber = 0;
-//  let scoreCount = 0;
-/*
-function nextQuestion(){
-    $('.questionAsked').on('click', '.startTest, function (event) {
+let score = 0;
 
-}*//*
-function checkAnswer () {
-    $('.questionBox').on('click', '.submitAnswer'  function (event){
-        $('.questionBox').css('display', 'hidden');
-    });
-}*/
-function getUserChoice () {
-$('form').on('submit', function (event) {
-    event.preventDefault();
-    let userChoice = $('input:checked');
-    let answer = userChoice.val();
-    let correctAnswer = `${COUNTRYDATA[questionNumber].correctAnswer}`;
-    if (answer === correctAnswer) {
-      $('fieldset').css('display', 'none');
-    }
-  });
+function createNextQuestion() {
+  nextQuestion();
+  questionNumber++;
+
 }
+
+function correctAnswerScreen(){
+  score++;
+  $('.questionForm').css('visibility', 'hidden' );
+  $('.questionFormSection').html(`<form class = 'greatJob'> <div>response <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </form>`);
+}
+
+function wrongAnswerScreen() {
+  $('.questionForm').css('visibility', 'hidden' );
+  $('.questionFormSection').html(`<form class = 'sorry'> <div>response <p>That is the incorrect answer <span>'${COUNTRYDATA[questionNumber].correctAnswer}' is the correct answer</span></p> <button class = 'nextButton'>NEXT </button></div> </form>`);
+}
+
+function checkAnswer(){
+  event.preventDefault();
+  let userAns = $("input[name='currentOption']:checked").parent('label').text();
+  let trimAnswer = userAns.trim();
+  let correctAns = `${COUNTRYDATA[questionNumber].correctAnswer}`;
+  (trimAnswer === correctAns) ? correctAnswerScreen() : wrongAnswerScreen();  
+}
+
+function onSubmit(){
+  $('form').on('submit', function(event){
+    event.preventDefault();
+    $('input:checked').val() ? 
+           checkAnswer() :
+      
+        alert('button not clicked');
+      
+  
+});
+} 
 
 function nextQuestion() {
     $('header').css('color', 'black');
-    $('.questionNumber').text('1');
-    $('label[for = choice1]').html(COUNTRYDATA[0].answers[0]);
-    $('label[for = choice2]').html(COUNTRYDATA[0].answers[1]);
-    $('label[for = choice3]').html(COUNTRYDATA[0].answers[2]);
-    $('label[for = choice4]').html(COUNTRYDATA[0].answers[3]);
+    $( {
+      for (let i = 0; i < COUNTRYDATA.length; i++) {
+        $('span[for = choice1]').html(COUNTRYDATA[i].answers[0]);
+        $('span[for = choice2]').html(COUNTRYDATA[i].answers[1]);
+        $('span[for = choice3]').html(COUNTRYDATA[i].answers[2]);
+        $('span[for = choice4]').html(COUNTRYDATA[i].answers[3]);
+      }
+  })
 }
-
 
 function startQuiz(){
   $('.initialStart').on('click','.startTest', function (event){   
@@ -53,13 +71,15 @@ function startQuiz(){
     $('.questionForm').css('display','block');
     $('.questionAsked').html(COUNTRYDATA[0].questions);
     $('.flagBox').css({ background:COUNTRYDATA[0].icon, 'background-size':'contain'});
+    $('.questionNumber').text(1);
     nextQuestion();
   });
 }
 
 function takeQuiz(){
   startQuiz();
-
+  onSubmit();
+  
 }
 
 $(takeQuiz);
