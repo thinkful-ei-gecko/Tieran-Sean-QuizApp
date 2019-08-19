@@ -12,20 +12,39 @@
  *   
  */
 'use strict' 
-//  let questionNumber = 0;
+let questionNumber = 0;
 //  let scoreCount = 0;
 /*
 function nextQuestion(){
     $('.questionAsked').on('click', '.startTest, function (event) {
 
+}*//*
+function checkAnswer () {
+    $('.questionBox').on('click', '.submitAnswer'  function (event){
+        $('.questionBox').css('display', 'hidden');
+    });
 }*/
+function getUserChoice () {
+$('form').on('submit', function (event) {
+    event.preventDefault();
+    let userChoice = $('input:checked');
+    let answer = userChoice.val();
+    let correctAnswer = `${COUNTRYDATA[questionNumber].correctAnswer}`;
+    if (answer === correctAnswer) {
+      $('fieldset').css('display', 'none');
+    }
+  });
+}
+
 function nextQuestion() {
     $('header').css('color', 'black');
+    $('.questionNumber').text('1');
     $('label[for = choice1]').html(COUNTRYDATA[0].answers[0]);
     $('label[for = choice2]').html(COUNTRYDATA[0].answers[1]);
     $('label[for = choice3]').html(COUNTRYDATA[0].answers[2]);
     $('label[for = choice4]').html(COUNTRYDATA[0].answers[3]);
 }
+
 
 function startQuiz(){
   $('.initialStart').on('click','.startTest', function (event){   
