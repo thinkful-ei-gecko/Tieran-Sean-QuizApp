@@ -12,74 +12,113 @@
  *   
  */
 'use strict' 
-let questionNumber = 0;
+let questionNumber = 1;
 let score = 0;
 
-function createNextQuestion() {
-  nextQuestion();
-  questionNumber++;
+// function onNextQuestion(){
+//   $('button').on('click', '.nextButton', function(event){
+//     console.log(questionNumber);
+//     event.preventDefault();
 
+//     $('input:checked').val() ? nextQuestion() : alert('button not clicked');
+//     $('.questionForm').css('visibility', 'visible');
+// });
+// }
+
+
+// function createNextQuestion() {
+//   nextQuestion();
+//   questionNumber++;
+// }
+function changeScore() {
+  score++;
+}
+
+function updateScore() {
+  changeScore();
+  $('.scoreCount').text(score);
+}
+
+function answerIsCorrect() {
+  correctAnswerScreen();
+  updateScore();
 }
 
 function correctAnswerScreen(){
-  score++;
   $('.questionForm').css('visibility', 'hidden' );
-  $('.questionFormSection').html(`<form class = 'greatJob'> <div>response <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </form>`);
+  $('.questionFormAnswer').html(`<div class = 'greatJob'> <div> <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
+  $('.greatJob').on('click', '.nextButton', function(event){
+    console.log('nextQuestion');
+    nextQuestion();
+    });
 }
 
 function wrongAnswerScreen() {
   $('.questionForm').css('visibility', 'hidden' );
-  $('.questionFormSection').html(`<form class = 'sorry'> <div>response <p>That is the incorrect answer <span>'${COUNTRYDATA[questionNumber].correctAnswer}' is the correct answer</span></p> <button class = 'nextButton'>NEXT </button></div> </form>`);
-}
+  $('.questionFormAnswer').html(`<div class = 'sorry'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
+  $('.sorry').on('click', '.nextButton', function(event){
+    console.log('nextQuestion');
+    nextQuestion();
+    });
+  }
+
 
 function checkAnswer(){
   event.preventDefault();
   let userAns = $("input[name='currentOption']:checked").parent('label').text();
   let trimAnswer = userAns.trim();
-  let correctAns = `${COUNTRYDATA[questionNumber].correctAnswer}`;
+  let correctAns = `${COUNTRYDATA[questionNumber-1].correctAnswer}`;
   (trimAnswer === correctAns) ? correctAnswerScreen() : wrongAnswerScreen();  
 }
 
 function onSubmit(){
   $('form').on('submit', function(event){
     event.preventDefault();
-    $('input:checked').val() ? 
+    questionNumber++;
+    $('input:checked') ? 
            checkAnswer() :
-      
-        alert('button not clicked');
-      
-  
-});
-} 
+        wrongAnswerScreen ();
+}); 
+}
 
 function nextQuestion() {
+    //document.getElementsByClassName("questionForm").reset();
+    $('.initialStart').remove();
+    $('.questionForm').css('display','block');
+    $('.questionForm').css('visibility', 'visible');
     $('header').css('color', 'black');
-    $( {
-      for (let i = 0; i < COUNTRYDATA.length; i++) {
-        $('span[for = choice1]').html(COUNTRYDATA[i].answers[0]);
-        $('span[for = choice2]').html(COUNTRYDATA[i].answers[1]);
-        $('span[for = choice3]').html(COUNTRYDATA[i].answers[2]);
-        $('span[for = choice4]').html(COUNTRYDATA[i].answers[3]);
+    let sizeOfDataObject = COUNTRYDATA.length;
+    console.log(sizeOfDataObject);
+    console.log(questionNumber-1);
+      if  ((questionNumber-1) < sizeOfDataObject) {
+        $('.questionAsked').html(COUNTRYDATA[questionNumber-1].questions);
+        $('.flagBox').css({ background:COUNTRYDATA[questionNumber-1].icon, 'background-size':'contain'});
+        $('.questionNumber').text(questionNumber);
+        $('span[for = choice1]').html(COUNTRYDATA[questionNumber-1].answers[0]);
+        $('span[for = choice2]').html(COUNTRYDATA[questionNumber-1].answers[1]);
+        $('span[for = choice3]').html(COUNTRYDATA[questionNumber-1].answers[2]);
+        $('span[for = choice4]').html(COUNTRYDATA[questionNumber-1].answers[3]);
       }
-  })
 }
+
 
 function startQuiz(){
   $('.initialStart').on('click','.startTest', function (event){   
     $('.initialStart').remove();
     $('body').css('background-image', 'url(https://i.pinimg.com/originals/c7/d9/c3/c7d9c3323f7c1828b1ceaee5facb2791.jpg)');
     $('.questionForm').css('display','block');
-    $('.questionAsked').html(COUNTRYDATA[0].questions);
-    $('.flagBox').css({ background:COUNTRYDATA[0].icon, 'background-size':'contain'});
-    $('.questionNumber').text(1);
     nextQuestion();
+    // $('.questionAsked').html(COUNTRYDATA[0].questions);
+    // $('.flagBox').css({ background:COUNTRYDATA[0].icon, 'background-size':'contain'});
+    // $('.questionNumber').text(1);
+    // nextQuestion();
   });
 }
 
 function takeQuiz(){
   startQuiz();
   onSubmit();
-  
+  //onNextQuestion();
 }
 
 $(takeQuiz);
