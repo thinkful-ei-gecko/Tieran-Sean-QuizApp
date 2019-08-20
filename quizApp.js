@@ -22,20 +22,19 @@ function finalPage(){
     $('.questionForm').hide();
     $('.response').css('visibility', 'hidden');
     $('body').css('background-image', 'url(https://bit.ly/2FwISzd)');
-    score = 0;
     formReload();
-    questionNumber = 0;
   });
 }
 
 function formReload() {
   $('.starterPage').children().show();
-  console.log("You have reloaded the form");
+  console.log('You have reloaded the form');
   $('.scoreCount').text(score);
   restartQuiz();
 }
 
 function restartQuiz (){
+    clearUserData();
   $('.initialStart').on('click','.startTest', function (event){   
     $('.questionForm').css('display','block');
     $('.questionForm').css('visibility', 'visible');
@@ -66,7 +65,6 @@ function correctAnswerScreen(){
   $('.questionForm').css('visibility', 'hidden' );
   $('.questionFormAnswer').html(`<div class = 'response'> <div> <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
   $('.response').on('click', '.nextButton', function(event){
-    console.log('nextQuestion');
     if (questionNumber < NUMBEROFQUESTIONS){
       nextQuestion();
     }
@@ -81,7 +79,6 @@ function wrongAnswerScreen() {
   $('.questionForm').css('visibility', 'hidden' );
   $('.questionFormAnswer').html(`<div class = 'response'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
   $('.response').on('click', '.nextButton', function(event){
-    console.log('nextQuestion');
     if (questionNumber < 5){
       nextQuestion();
     }
