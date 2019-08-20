@@ -117,6 +117,7 @@ function onSubmit(){
 function nextQuestion() {
   questionNumber++;
   let site = null;
+  $('.response').css('visibility', 'hidden');
   $('.questionForm').css('display','block');
   $('.questionForm').css('visibility', 'visible');
   $('header').css('color', 'black');

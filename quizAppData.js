@@ -24,7 +24,7 @@ const COUNTRYDATA =
      {questions: 'What country has the capital of Georgetown?', 
      answers:['Guyana', 'Uruguay', 'Cayenne', 'Madagascar'], 
      correctAnswer:'Guyana', 
-     icon:'url(https://upload.wikimedia.org/wikipedia/commons/9/99/Flag_of_Guyana.svg)', 
+     icon:'url(https://www.crwflags.com/fotw/images/g/gy.gif)', 
      alt:'Flag of Guyana',
      background: 'url(https://wallpapercave.com/wp/wp2201553.jpg)'},
     /**
