@@ -16,14 +16,16 @@
         </ul>
     </header>
     <main>
-        <section class="initialStart">
-            <h2>Let's see how well you know other countries' capitals.. </h2>
-            <button class="startTest">Begin!</button>
-            <h3> ..or maybe you'd like to </h3>
-            <form action="https://en.wikipedia.org/wiki/List_of_national_capitals" >
-                <button class = "learnButton" type = "submit">Learn!</button>
-            </form>       
-        </section> 
+            <div class = starterPage>
+                <section class="initialStart">
+                    <h2>Let's see how well you know other countries' capitals.. </h2>
+                    <button class="startTest">Begin!</button>
+                    <h3> ..or maybe you'd like to </h3>
+                    <form action="https://en.wikipedia.org/wiki/List_of_national_capitals" >
+                    <button class = "learnButton" type = "submit">Learn!</button>
+                    </form>       
+                </section> 
+            </div>
         <section class="questionFormSection">
             <div class = 'questionFormAnswer'></div>
             <form class = "questionForm">
@@ -32,10 +34,10 @@
                     <div class = "flagBox"></div>
                     <label class ="questionAsked"  for="Question Asked"></label>
                     <fieldset name="Multiple Choice">
-                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice1' id='choice1' >choice1</span></label></br>
-                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice2' id='choice2' >choice2</span></label></br>
-                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice3' id='choice3' >choice3</span></label></br>
-                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[].answers' class = 'option'> <span for='choice4' id='choice4' >choice4</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[questionNumber].answers[0]' class = 'option'> <span for='choice1' id='choice1' >choice1</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[questionNumber].answers[1]' class = 'option'> <span for='choice2' id='choice2' >choice2</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[questionNumber].answers[2]' class = 'option'> <span for='choice3' id='choice3' >choice3</span></label></br>
+                        <label> <input type = 'radio' name ='currentOption' value = 'COUNTRYDATA[questionNumber].answers[3]' class = 'option'> <span for='choice4' id='choice4' >choice4</span></label></br>
                     </fieldset>
                     <button class="submitAnswer">Submit Answer</button>
                 </div>

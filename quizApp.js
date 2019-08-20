@@ -19,21 +19,39 @@ const NUMBEROFQUESTIONS = 5;
 function finalPage(){
   $('.questionFormAnswer').html(`<div class = 'response'> <div> <p> You are finished! Your score is ${score} </p> <button class = 'finalButton'> RESTART </button></div> </div>`);
   $('.response').on('click', '.finalButton', function(event){
-    $('.questionForm').detach();
+    $('.questionForm').hide();
     $('.response').css('visibility', 'hidden');
-    $('.questionForm').css('visibility', 'hidden');
-    //$('.initialStart').appendTo('main');
     $('body').css('background-image', 'url(https://bit.ly/2FwISzd)');
     score = 0;
     formReload();
     questionNumber = 0;
-    //startQuiz();
-    });
+  });
 }
 
 function formReload() {
-  $('.initialStart').appendTo('main');
-  $('.questionForm').appendTo()
+  $('.starterPage').children().show();
+  console.log("You have reloaded the form");
+  $('.scoreCount').text(score);
+  restartQuiz();
+}
+
+function restartQuiz (){
+  $('.initialStart').on('click','.startTest', function (event){   
+    $('.questionForm').css('display','block');
+    $('.questionForm').css('visibility', 'visible');
+    $('.starterPage').children().hide();
+    $('body').css('background-image', 'url(https://i.pinimg.com/originals/c7/d9/c3/c7d9c3323f7c1828b1ceaee5facb2791.jpg)');
+    $('.questionForm').css('display','block');
+    questionNumber--;
+    nextQuestion();
+  });
+}
+
+function clearUserData(){
+    score = 0;
+    questionNumber = 0;
+    $('.questionNumber').text(questionNumber);
+    $('.scoreCount').text(score);
 }
 
 function changeScore() {
@@ -45,28 +63,40 @@ function updateScore() {
   $('.scoreCount').text(score);
 }
 
-function answerIsCorrect() {
-  correctAnswerScreen();
-}
+// function answerIsCorrect() {
+//   correctAnswerScreen();
+// }
 
 function correctAnswerScreen(){
   updateScore();
+  $('input[type="radio"]').prop('checked', false);
   $('.questionForm').css('visibility', 'hidden' );
   $('.questionFormAnswer').html(`<div class = 'response'> <div> <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
   $('.response').on('click', '.nextButton', function(event){
     console.log('nextQuestion');
-    nextQuestion();
-    });
+    if (questionNumber < NUMBEROFQUESTIONS){
+      nextQuestion();
+    }
+    else if (questionNumber === NUMBEROFQUESTIONS) {
+      finalPage();
+    }
+  });
 }
 
 function wrongAnswerScreen() {
+  $('input[type="radio"]').prop('checked', false);
   $('.questionForm').css('visibility', 'hidden' );
   $('.questionFormAnswer').html(`<div class = 'response'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
   $('.response').on('click', '.nextButton', function(event){
     console.log('nextQuestion');
-    nextQuestion();
-    });
-  }
+    if (questionNumber < 5){
+      nextQuestion();
+    }
+    else if (questionNumber = 5) {
+      finalPage();
+    }
+  });
+}
 
 function checkAnswer(){
   event.preventDefault();
@@ -79,46 +109,46 @@ function checkAnswer(){
 function onSubmit(){
   $('form').on('submit', function(event){
     event.preventDefault();
-    $('input:checked') ? 
-           checkAnswer() :
+    if (questionNumber <= 5){
+      $('input:checked') ? 
+        checkAnswer() :
         wrongAnswerScreen ();
-}); 
+    }
+    else startQuiz();
+  }); 
 }
 
 function nextQuestion() {
-;    //document.getElementsByClassName("questionForm").reset();
-    questionNumber++;
-    let site = null;
-    $('.initialStart').detach();
-    $('.questionForm').css('display','block');
-    $('.questionForm').css('visibility', 'visible');
-    $('header').css('color', 'black');
-    let sizeOfDataObject = COUNTRYDATA.length;
-    if (questionNumber >= 1 && questionNumber <= 5){
-
-      site = COUNTRYDATA[questionNumber-1].background;
-    }
-    $('body').css('background-image', site);
-      if  ((questionNumber-1) < sizeOfDataObject) {
-        $('.questionAsked').html(COUNTRYDATA[questionNumber-1].questions);
-        $('.flagBox').css({ background:COUNTRYDATA[questionNumber-1].icon, 'background-size':'contain'});
-        $('.questionNumber').text(questionNumber);
-        $('span[for = choice1]').html(COUNTRYDATA[questionNumber-1].answers[0]);
-        $('span[for = choice2]').html(COUNTRYDATA[questionNumber-1].answers[1]);
-        $('span[for = choice3]').html(COUNTRYDATA[questionNumber-1].answers[2]);
-        $('span[for = choice4]').html(COUNTRYDATA[questionNumber-1].answers[3]);
-      }
-      else {
-        finalPage();
-      }
+  questionNumber++;
+  let site = null;
+  $('.questionForm').css('display','block');
+  $('.questionForm').css('visibility', 'visible');
+  $('header').css('color', 'black');
+  let sizeOfDataObject = COUNTRYDATA.length;
+  if (questionNumber >= 1 && questionNumber <= 5){
+    site = COUNTRYDATA[questionNumber-1].background;
+  }
+  $('body').css('background-image', site);
+  if  ((questionNumber-1) < sizeOfDataObject) {
+    $('.questionAsked').html(COUNTRYDATA[questionNumber-1].questions);
+    $('.flagBox').css({ background:COUNTRYDATA[questionNumber-1].icon, 'background-size':'contain'});
+    $('.questionNumber').text(questionNumber);
+    $('span[for = choice1]').html(COUNTRYDATA[questionNumber-1].answers[0]);
+    $('span[for = choice2]').html(COUNTRYDATA[questionNumber-1].answers[1]);
+    $('span[for = choice3]').html(COUNTRYDATA[questionNumber-1].answers[2]);
+    $('span[for = choice4]').html(COUNTRYDATA[questionNumber-1].answers[3]);
+  }
+  else {
+    finalPage();
+  }
 }
 
 
 function startQuiz(){
   $('.initialStart').on('click','.startTest', function (event){   
-    // $('.questionForm').css('display','block');
-    // $('.questionForm').css('visibility', 'visible');
-    $('.initialStart').detach();
+    $('.questionForm').css('display','block');
+    $('.questionForm').css('visibility', 'visible');
+    $('.starterPage').children().hide();
     $('body').css('background-image', 'url(https://i.pinimg.com/originals/c7/d9/c3/c7d9c3323f7c1828b1ceaee5facb2791.jpg)');
     $('.questionForm').css('display','block');
     nextQuestion();
