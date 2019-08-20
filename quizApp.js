@@ -12,24 +12,30 @@
  *   
  */
 'use strict' 
-let questionNumber = 1;
+let questionNumber = 0;
 let score = 0;
+const NUMBEROFQUESTIONS = 5;
 
-// function onNextQuestion(){
-//   $('button').on('click', '.nextButton', function(event){
-//     console.log(questionNumber);
-//     event.preventDefault();
+function finalPage(){
+  $('.questionFormAnswer').html(`<div class = 'response'> <div> <p> You are finished! Your score is ${score} </p> <button class = 'finalButton'> RESTART </button></div> </div>`);
+  $('.response').on('click', '.finalButton', function(event){
+    $('.questionForm').detach();
+    $('.response').css('visibility', 'hidden');
+    $('.questionForm').css('visibility', 'hidden');
+    //$('.initialStart').appendTo('main');
+    $('body').css('background-image', 'url(https://bit.ly/2FwISzd)');
+    score = 0;
+    formReload();
+    questionNumber = 0;
+    //startQuiz();
+    });
+}
 
-//     $('input:checked').val() ? nextQuestion() : alert('button not clicked');
-//     $('.questionForm').css('visibility', 'visible');
-// });
-// }
+function formReload() {
+  $('.initialStart').appendTo('main');
+  $('.questionForm').appendTo()
+}
 
-
-// function createNextQuestion() {
-//   nextQuestion();
-//   questionNumber++;
-// }
 function changeScore() {
   score++;
 }
@@ -41,13 +47,13 @@ function updateScore() {
 
 function answerIsCorrect() {
   correctAnswerScreen();
-  updateScore();
 }
 
 function correctAnswerScreen(){
+  updateScore();
   $('.questionForm').css('visibility', 'hidden' );
-  $('.questionFormAnswer').html(`<div class = 'greatJob'> <div> <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
-  $('.greatJob').on('click', '.nextButton', function(event){
+  $('.questionFormAnswer').html(`<div class = 'response'> <div> <p>That is the correct answer!</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
+  $('.response').on('click', '.nextButton', function(event){
     console.log('nextQuestion');
     nextQuestion();
     });
@@ -55,13 +61,12 @@ function correctAnswerScreen(){
 
 function wrongAnswerScreen() {
   $('.questionForm').css('visibility', 'hidden' );
-  $('.questionFormAnswer').html(`<div class = 'sorry'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
-  $('.sorry').on('click', '.nextButton', function(event){
+  $('.questionFormAnswer').html(`<div class = 'response'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
+  $('.response').on('click', '.nextButton', function(event){
     console.log('nextQuestion');
     nextQuestion();
     });
   }
-
 
 function checkAnswer(){
   event.preventDefault();
@@ -74,7 +79,6 @@ function checkAnswer(){
 function onSubmit(){
   $('form').on('submit', function(event){
     event.preventDefault();
-    questionNumber++;
     $('input:checked') ? 
            checkAnswer() :
         wrongAnswerScreen ();
@@ -82,14 +86,19 @@ function onSubmit(){
 }
 
 function nextQuestion() {
-    //document.getElementsByClassName("questionForm").reset();
-    $('.initialStart').remove();
+;    //document.getElementsByClassName("questionForm").reset();
+    questionNumber++;
+    let site = null;
+    $('.initialStart').detach();
     $('.questionForm').css('display','block');
     $('.questionForm').css('visibility', 'visible');
     $('header').css('color', 'black');
     let sizeOfDataObject = COUNTRYDATA.length;
-    console.log(sizeOfDataObject);
-    console.log(questionNumber-1);
+    if (questionNumber >= 1 && questionNumber <= 5){
+
+      site = COUNTRYDATA[questionNumber-1].background;
+    }
+    $('body').css('background-image', site);
       if  ((questionNumber-1) < sizeOfDataObject) {
         $('.questionAsked').html(COUNTRYDATA[questionNumber-1].questions);
         $('.flagBox').css({ background:COUNTRYDATA[questionNumber-1].icon, 'background-size':'contain'});
@@ -99,26 +108,26 @@ function nextQuestion() {
         $('span[for = choice3]').html(COUNTRYDATA[questionNumber-1].answers[2]);
         $('span[for = choice4]').html(COUNTRYDATA[questionNumber-1].answers[3]);
       }
+      else {
+        finalPage();
+      }
 }
 
 
 function startQuiz(){
   $('.initialStart').on('click','.startTest', function (event){   
-    $('.initialStart').remove();
+    // $('.questionForm').css('display','block');
+    // $('.questionForm').css('visibility', 'visible');
+    $('.initialStart').detach();
     $('body').css('background-image', 'url(https://i.pinimg.com/originals/c7/d9/c3/c7d9c3323f7c1828b1ceaee5facb2791.jpg)');
     $('.questionForm').css('display','block');
     nextQuestion();
-    // $('.questionAsked').html(COUNTRYDATA[0].questions);
-    // $('.flagBox').css({ background:COUNTRYDATA[0].icon, 'background-size':'contain'});
-    // $('.questionNumber').text(1);
-    // nextQuestion();
   });
 }
 
 function takeQuiz(){
   startQuiz();
   onSubmit();
-  //onNextQuestion();
 }
 
 $(takeQuiz);
