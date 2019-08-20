@@ -28,7 +28,6 @@ function finalPage(){
 
 function formReload() {
   $('.starterPage').children().show();
-  console.log('You have reloaded the form');
   $('.scoreCount').text(score);
   restartQuiz();
 }
@@ -79,10 +78,10 @@ function wrongAnswerScreen() {
   $('.questionForm').css('visibility', 'hidden' );
   $('.questionFormAnswer').html(`<div class = 'response'> <div><p>That is the incorrect answer</p> <button class = 'nextButton'>NEXT </button></div> </div>`);
   $('.response').on('click', '.nextButton', function(event){
-    if (questionNumber < 5){
+    if (questionNumber < NUMBEROFQUESTIONS){
       nextQuestion();
     }
-    else if (questionNumber = 5) {
+    else if (questionNumber === NUMBEROFQUESTIONS) {
       finalPage();
     }
   });
