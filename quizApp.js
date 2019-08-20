@@ -54,12 +54,9 @@ function clearUserData(){
     $('.scoreCount').text(score);
 }
 
-function changeScore() {
-  score++;
-}
 
 function updateScore() {
-  changeScore();
+  score++;
   $('.scoreCount').text(score);
 }
 
