@@ -46,14 +46,3 @@ const COUNTRYDATA =
      alt:'Flag of Greece',
      background: 'url(http://7wallpapers.net/wp-content/uploads/8_Athens.jpg)'
     }];
-
-
-
-
-const newBackground = [
-  {icon:'', alt:'Djibouti'},
-  {icon:'', alt:'French'},
-  {icon:'', alt:'Guyana'},
-  {icon:'', alt:'Greenland'},
-  {icon:'', alt:'Greece'}
-];

@@ -63,10 +63,6 @@ function updateScore() {
   $('.scoreCount').text(score);
 }
 
-// function answerIsCorrect() {
-//   correctAnswerScreen();
-// }
-
 function correctAnswerScreen(){
   updateScore();
   $('input[type="radio"]').prop('checked', false);
